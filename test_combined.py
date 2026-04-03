@@ -65,7 +65,7 @@ def open_vscode() -> None:
 
 # ---------- Audio ----------
 
-THRESHOLD      = 0.15
+THRESHOLD      = 0.12
 SAMPLERATE     = 44100
 CHUNK          = 1024
 IMPULSE_MAX_MS = 150
