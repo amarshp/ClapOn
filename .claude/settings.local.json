@@ -3,7 +3,23 @@
     "allow": [
       "Bash(pip install:*)",
       "Bash(powershell.exe:*)",
-      "Bash(python test_clap.py)"
+      "Bash(python test_clap.py)",
+      "Bash(git:*)"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git -C \"$PWD\" add -A 2>/dev/null && (git -C \"$PWD\" diff --cached --quiet || git -C \"$PWD\" commit -m \"chore: auto-save [claude]\") 2>/dev/null || true",
+            "timeout": 15,
+            "async": true
+          }
+        ]
+      }
     ]
   }
 }
