@@ -12,7 +12,7 @@ import soundcard as sc
 sys.path.insert(0, "src")
 from clapon.detector import ClapDetector
 
-THRESHOLD       = 0.10
+THRESHOLD       = 0.05
 SAMPLERATE      = 44100
 CHUNK           = 1024
 DURATION        = 10

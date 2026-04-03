@@ -23,15 +23,18 @@ class ClapDetector:
         max_gap_ms: int = 800,
         impulse_max_ms: int = 60,
         cooldown_s: float = 3.0,
+        min_silence_ms: int = 100,
     ) -> None:
         self.threshold = threshold
         self.min_gap_ms = min_gap_ms
         self.max_gap_ms = max_gap_ms
         self.impulse_max_s = impulse_max_ms / 1000.0
         self.cooldown_s = cooldown_s
+        self.min_silence_s = min_silence_ms / 1000.0
 
         self._state = _State.IDLE
         self._spike_start: float | None = None
+        self._last_spike_end: float = 0.0
         self._first_clap_at: float = 0.0
         self._triggered_at: float = 0.0
 
@@ -71,7 +74,13 @@ class ClapDetector:
         return False
 
     def _track_impulse(self, is_spike: bool, t: float) -> bool:
-        """Returns True once when a short spike ends (= a clap impulse)."""
+        """Returns True once when a short spike ends (= a clap impulse).
+
+        After a valid clap is detected, all input is ignored for min_silence_s
+        (refractory period) to suppress mic bounce from the same physical clap.
+        """
+        if t - self._last_spike_end < self.min_silence_s:
+            return False
         if is_spike:
             if self._spike_start is None:
                 self._spike_start = t
@@ -79,5 +88,7 @@ class ClapDetector:
         if self._spike_start is not None:
             duration = t - self._spike_start
             self._spike_start = None
-            return duration <= self.impulse_max_s
+            if duration <= self.impulse_max_s:
+                self._last_spike_end = t
+                return True
         return False
