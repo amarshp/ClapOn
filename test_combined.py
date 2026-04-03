@@ -72,8 +72,8 @@ IMPULSE_MAX_MS = 150
 
 detector = ClapDetector(
     threshold=THRESHOLD,
-    min_gap_ms=150,
-    max_gap_ms=800,
+    min_gap_ms=80,
+    max_gap_ms=1200,
     impulse_max_ms=IMPULSE_MAX_MS,
 )
 
