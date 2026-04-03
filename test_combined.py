@@ -65,10 +65,10 @@ def open_vscode() -> None:
 
 # ---------- Audio ----------
 
-THRESHOLD      = 0.05
+THRESHOLD      = 0.15
 SAMPLERATE     = 44100
 CHUNK          = 1024
-IMPULSE_MAX_MS = 300
+IMPULSE_MAX_MS = 150
 
 detector = ClapDetector(
     threshold=THRESHOLD,

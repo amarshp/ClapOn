@@ -12,11 +12,11 @@ import soundcard as sc
 sys.path.insert(0, "src")
 from clapon.detector import ClapDetector
 
-THRESHOLD       = 0.05
+THRESHOLD       = 0.15
 SAMPLERATE      = 44100
 CHUNK           = 1024
 DURATION        = 30
-IMPULSE_MAX_MS  = 300   # loosened — Intel array mics have longer decay
+IMPULSE_MAX_MS  = 150   # claps are short sharp spikes; sustained sounds filtered out
 
 detector = ClapDetector(
     threshold=THRESHOLD,
