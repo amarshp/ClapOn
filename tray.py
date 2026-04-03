@@ -26,6 +26,7 @@ THRESHOLD      = 0.15
 SAMPLERATE     = 44100
 CHUNK          = 1024
 IMPULSE_MAX_MS = 150
+STATE_FILE     = os.path.join(os.path.dirname(__file__), ".clapon_state")
 
 # ---------- VS Code ----------
 DB   = os.path.expandvars(r"%APPDATA%\Code\User\globalStorage\state.vscdb")
@@ -75,6 +76,19 @@ def _make_icon(active: bool) -> Image.Image:
     return img
 
 
+# ---------- State persistence ----------
+def _load_state() -> bool:
+    try:
+        return open(STATE_FILE).read().strip() == "active"
+    except FileNotFoundError:
+        return True  # default: active on first run
+
+
+def _save_state(active: bool) -> None:
+    with open(STATE_FILE, "w") as f:
+        f.write("active" if active else "paused")
+
+
 # ---------- Listener ----------
 _active     = False
 _stop_evt   = threading.Event()
@@ -107,6 +121,7 @@ def _start(tray: pystray.Icon) -> None:
         _active = True
     tray.icon  = _make_icon(True)
     tray.title = "ClapOn — listening"
+    _save_state(True)
 
 
 def _stop(tray: pystray.Icon) -> None:
@@ -118,6 +133,7 @@ def _stop(tray: pystray.Icon) -> None:
         _active = False
     tray.icon  = _make_icon(False)
     tray.title = "ClapOn — paused"
+    _save_state(False)
 
 
 # ---------- Menu actions ----------
@@ -143,8 +159,14 @@ def main() -> None:
         pystray.MenuItem(_toggle_label, _toggle, default=True),
         pystray.MenuItem("Quit", _quit),
     )
-    tray = pystray.Icon("ClapOn", _make_icon(False), title="ClapOn — paused", menu=menu)
-    tray.run(_start)   # _start is called once the tray is ready
+    should_start = _load_state()
+    tray = pystray.Icon(
+        "ClapOn",
+        _make_icon(False),
+        title="ClapOn — paused",
+        menu=menu,
+    )
+    tray.run(_start if should_start else None)
 
 
 if __name__ == "__main__":
