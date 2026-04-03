@@ -33,13 +33,18 @@ htmlcov/
 venv/
 env/
 
-# IDE
+# IDE / AI tooling
 .vscode/
 .idea/
+.claude/
 
 # OS
 .DS_Store
 Thumbs.db
+
+# ClapOn runtime state
+.clapon_state
+.clapon_trigger
 
 # Node (if ever added)
 node_modules/

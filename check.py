@@ -7,7 +7,7 @@ try:
     print("  OK", flush=True)
 except Exception as e:
     print(f"  FAILED: {e}", flush=True)
-    sys.exit(1)``
+    sys.exit(1)
 
 print("Step 2: listing audio devices...", flush=True)
 try:
