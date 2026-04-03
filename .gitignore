@@ -41,8 +41,5 @@ env/
 .DS_Store
 Thumbs.db
 
-# ClapOn runtime state
-.clapon_state
-
 # Node (if ever added)
 node_modules/

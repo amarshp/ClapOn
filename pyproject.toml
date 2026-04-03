@@ -9,8 +9,6 @@ requires-python = ">=3.11"
 dependencies = [
     "soundcard>=0.4.2",
     "numpy>=1.26.0",
-    "pystray>=0.19.5",
-    "Pillow>=10.0.0",
 ]
 
 [project.optional-dependencies]
