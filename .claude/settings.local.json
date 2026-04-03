@@ -14,8 +14,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "git -C \"$PWD\" add -A 2>/dev/null && (git -C \"$PWD\" diff --cached --quiet || git -C \"$PWD\" commit -m \"chore: auto-save [claude]\") 2>/dev/null || true",
-            "timeout": 15,
+            "command": "bash \".claude/hooks/auto-commit.sh\" 2>/dev/null || true",
+            "timeout": 30,
             "async": true
           }
         ]
