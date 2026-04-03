@@ -142,6 +142,7 @@ def _toggle(tray: pystray.Icon, item) -> None:
         _stop(tray)
     else:
         _start(tray)
+    tray.update_menu()
 
 
 def _quit(tray: pystray.Icon, item) -> None:
@@ -149,22 +150,22 @@ def _quit(tray: pystray.Icon, item) -> None:
     tray.stop()
 
 
-def _toggle_label(item) -> str:
-    return "Pause" if _active else "Resume"
+def _make_menu() -> pystray.Menu:
+    label = "Pause" if _active else "Resume"
+    return pystray.Menu(
+        pystray.MenuItem(label, _toggle, default=True),
+        pystray.MenuItem("Quit", _quit),
+    )
 
 
 # ---------- Entry point ----------
 def main() -> None:
-    menu = pystray.Menu(
-        pystray.MenuItem(_toggle_label, _toggle, default=True),
-        pystray.MenuItem("Quit", _quit),
-    )
     should_start = _load_state()
     tray = pystray.Icon(
         "ClapOn",
         _make_icon(False),
         title="ClapOn — paused",
-        menu=menu,
+        menu=_make_menu,
     )
     tray.run(_start if should_start else None)
 
