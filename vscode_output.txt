@@ -1,0 +1,3 @@
+Most recent project: c:\Users\Amarsh\OneDrive\Documents\Personal\Projects\PersonaRag Chat
+Opening VS Code...
+Done — VS Code should be opening.

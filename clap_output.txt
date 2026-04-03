@@ -1,0 +1,19 @@
+Mic      : Microphone Array (Intel® Smart Sound Technology for Digital Microphones)
+Threshold: 0.05   impulse_max: 300ms
+Listening for 30s — double-clap near your mic...
+
+  [spike start] rms=0.0809
+  [spike end  ] duration=31ms
+  [spike start] rms=0.0681
+  [spike end  ] duration=32ms
+
+  >>> DOUBLE-CLAP #1 <<<
+
+  [spike start] rms=0.0742
+  [spike end  ] duration=31ms
+  [spike start] rms=0.0680
+  [spike end  ] duration=32ms
+
+--- Results after 30.6s ---
+Peak RMS : 0.0809  (threshold=0.05)
+Claps    : 1
