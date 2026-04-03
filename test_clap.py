@@ -20,7 +20,7 @@ IMPULSE_MAX_MS  = 300   # claps are short sharp spikes; sustained sounds filtere
 
 detector = ClapDetector(
     threshold=THRESHOLD,
-    min_gap_ms=80,
+    min_gap_ms=250,
     max_gap_ms=1200,
     impulse_max_ms=IMPULSE_MAX_MS,
 )
