@@ -65,7 +65,7 @@ def open_vscode() -> None:
 
 # ---------- Audio ----------
 
-THRESHOLD      = 0.12
+THRESHOLD      = 0.08
 SAMPLERATE     = 44100
 CHUNK          = 1024
 IMPULSE_MAX_MS = 150
@@ -75,6 +75,7 @@ detector = ClapDetector(
     min_gap_ms=250,
     max_gap_ms=1200,
     impulse_max_ms=IMPULSE_MAX_MS,
+    min_silence_ms=200,
 )
 
 mic = sc.default_microphone()

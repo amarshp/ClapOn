@@ -12,7 +12,7 @@ import soundcard as sc
 sys.path.insert(0, "src")
 from clapon.detector import ClapDetector
 
-THRESHOLD       = 0.05
+THRESHOLD       = 0.08
 SAMPLERATE      = 44100
 CHUNK           = 1024
 DURATION        = 10
@@ -23,6 +23,7 @@ detector = ClapDetector(
     min_gap_ms=250,
     max_gap_ms=1200,
     impulse_max_ms=IMPULSE_MAX_MS,
+    min_silence_ms=200,
 )
 
 clap_count = 0
